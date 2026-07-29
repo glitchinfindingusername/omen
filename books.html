@@ -1,0 +1,202 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <title>Books & Published Works | Vivek H Sutar</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    /* --- Base Variables & Core Styles --- */
+    :root {
+      --bg-color: #FAFAFA;       
+      --text-main: #222222;      
+      --text-muted: #666666;     
+      --accent: #2C3E50;         
+      --font-serif: 'Lora', serif;
+      --font-sans: 'Inter', sans-serif;
+      --max-width: 1000px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: var(--font-sans); background-color: var(--bg-color); color: var(--text-main); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    h1, h2, h3, .logo { font-family: var(--font-serif); font-weight: 600; color: var(--text-main); }
+    a { text-decoration: none; color: inherit; transition: opacity 0.2s ease; }
+    a:hover { opacity: 0.7; }
+    .container { max-width: var(--max-width); margin: 0 auto; padding: 0 2rem; }
+
+    /* --- Header & Nav --- */
+    #header { padding: 2rem 0; border-bottom: 1px solid #EAEAEA; background: #fff; }
+    .header-inner { max-width: var(--max-width); margin: 0 auto; padding: 0 2rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-size: 1.5rem; letter-spacing: -0.02em; }
+    .nav-links { display: flex; gap: 2rem; }
+    .nav-links a { font-size: 0.95rem; font-weight: 500; color: var(--text-muted); }
+    .nav-links a:hover, .nav-links a.active { color: var(--text-main); }
+
+    /* --- Page Header --- */
+    .page-header { padding: 4rem 0 2rem; text-align: center; }
+    .page-header h1 { font-size: 3rem; margin-bottom: 1rem; }
+    .page-header p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* --- Books Layout --- */
+    .books-list { display: flex; flex-direction: column; gap: 5rem; margin-bottom: 6rem; padding-top: 2rem; }
+    
+    .book-card {
+      display: flex;
+      align-items: center;
+      gap: 4rem;
+      background: #fff;
+      padding: 3rem;
+      border: 1px solid #EAEAEA;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+    }
+
+    .book-cover {
+      flex: 0 0 300px;
+      position: relative;
+    }
+    
+    .book-cover img {
+      width: 100%;
+      height: auto;
+      border-radius: 4px;
+      box-shadow: 15px 15px 30px rgba(0,0,0,0.1), -5px -5px 15px rgba(0,0,0,0.02);
+      transition: transform 0.3s ease;
+    }
+    
+    .book-cover:hover img { transform: translateY(-5px); }
+
+    .book-info { flex: 1; }
+    .book-title { font-size: 2.5rem; line-height: 1.2; margin-bottom: 0.5rem; }
+    .book-subtitle { font-size: 1.25rem; color: var(--text-muted); font-family: var(--font-serif); font-style: italic; margin-bottom: 1.5rem; }
+    
+    .book-meta { display: flex; gap: 1rem; margin-bottom: 1.5rem; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--accent); }
+    
+    .book-description { margin-bottom: 2rem; font-size: 1.05rem; }
+    
+    .book-endorsement {
+      border-left: 3px solid var(--accent);
+      padding-left: 1.5rem;
+      margin-bottom: 2.5rem;
+      font-family: var(--font-serif);
+      font-style: italic;
+      color: var(--text-muted);
+    }
+
+    /* Buttons */
+    .btn-group { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn { padding: 0.8rem 1.8rem; font-weight: 500; border-radius: 4px; font-size: 0.95rem; text-align: center; }
+    .btn-primary { background-color: var(--accent); color: #fff; }
+    .btn-outline { border: 1px solid #CCC; color: var(--text-main); }
+    .btn-primary:hover { opacity: 0.9; }
+    .btn-outline:hover { border-color: var(--text-main); }
+
+    /* Responsive */
+    @media (max-width: 850px) {
+      .book-card { flex-direction: column; text-align: center; gap: 2rem; padding: 2rem; }
+      .book-meta, .btn-group { justify-content: center; }
+      .book-endorsement { border-left: none; padding-left: 0; font-size: 1.1rem; }
+    }
+
+    /* --- Footer --- */
+    #footer { text-align: center; padding: 4rem 0; border-top: 1px solid #EAEAEA; color: var(--text-muted); font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header id="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">Vivek H Sutar</a>
+      <nav class="nav-links">
+        <a href="about.html">About</a>
+        <a href="books.html" class="active">Books</a>
+        <a href="op-eds.html">Op-Eds</a>
+        <a href="media.html">Media</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="page-header">
+      <h1>Published Works</h1>
+      <p>Exploring artificial intelligence, poetry, and society through literature.</p>
+    </section>
+
+    <div class="books-list">
+      
+      <!-- Book 1: Umbartha -->
+      <article class="book-card">
+        <div class="book-cover">
+          <!-- Replace placeholder with your actual cover image -->
+          <img src="https://via.placeholder.com/600x900.png?text=Umbartha+Cover" alt="Umbartha Book Cover">
+        </div>
+        <div class="book-info">
+          <h2 class="book-title">Umbartha</h2>
+          <p class="book-subtitle">Nava Yug Suru Hotay (Threshold... A New Era Begins)</p>
+          <div class="book-meta">
+            <span>Marathi</span> &bull; <span>Non-Fiction / AI Policy</span>
+          </div>
+          <p class="book-description">A critical examination of artificial intelligence, Industry 5.0, and the governance of emerging technologies. Written specifically for a regional-language audience, this book seeks to broaden public engagement with technological change and make discussions on the future of work accessible beyond English-speaking circles.</p>
+          <blockquote class="book-endorsement">
+            "A vital contribution to bringing global technological discourse to the grassroots level in Maharashtra."
+          </blockquote>
+          <div class="btn-group">
+            <a href="https://www.amazon.in/dp/8199447176" target="_blank" class="btn btn-primary"><i class="fab fa-amazon"></i> Buy on Amazon</a>
+            <a href="media.html?filter=books" class="btn btn-outline">View Press Coverage</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Book 2: Healing Pages -->
+      <article class="book-card">
+        <div class="book-cover">
+          <img src="https://via.placeholder.com/600x900.png?text=Healing+Pages+Cover" alt="Healing Pages Book Cover">
+        </div>
+        <div class="book-info">
+          <h2 class="book-title">Healing Pages</h2>
+          <p class="book-subtitle">Navigating the complexities of the human experience</p>
+          <div class="book-meta">
+            <span>English</span> &bull; <span>Literature</span>
+          </div>
+          <p class="book-description">A profound literary exploration of healing, emotion, and resilience. This collection delves into the quiet moments of transformation, offering readers a space for reflection and connection.</p>
+          <div class="btn-group">
+            <a href="https://a.co/d/8yo9Q30" target="_blank" class="btn btn-primary"><i class="fab fa-amazon"></i> Buy on Amazon</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Book 3: Echoes of Emotions -->
+      <article class="book-card">
+        <div class="book-cover">
+          <img src="https://via.placeholder.com/600x900.png?text=Echoes+Cover" alt="Echoes of Emotions Book Cover">
+        </div>
+        <div class="book-info">
+          <h2 class="book-title">Echoes of Emotions</h2>
+          <p class="book-subtitle">A collection of thoughts and verses</p>
+          <div class="book-meta">
+            <span>English</span> &bull; <span>Poetry</span>
+          </div>
+          <p class="book-description">An evocative debut exploring the depths of feeling and the universal threads that bind our emotional lives together. Each piece is crafted to resonate with the reader's own inner landscape.</p>
+          <div class="btn-group">
+            <a href="https://www.amazon.com/dp/B0C4V18Y29" target="_blank" class="btn btn-primary"><i class="fab fa-amazon"></i> Buy on Amazon</a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </main>
+
+  <footer id="footer">
+    <div class="container">
+      <p>&copy; 2026 Vivek H Sutar. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
