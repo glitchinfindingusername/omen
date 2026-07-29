@@ -1,0 +1,268 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <title>About | Vivek H Sutar</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    /* --- Base Variables & Core Styles --- */
+    :root {
+      --bg-color: #FAFAFA;       
+      --text-main: #222222;      
+      --text-muted: #666666;     
+      --accent: #2C3E50;         
+      --font-serif: 'Lora', serif;
+      --font-sans: 'Inter', sans-serif;
+      --max-width: 900px; /* Slightly narrower for reading comfort */
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: var(--font-sans); background-color: var(--bg-color); color: var(--text-main); line-height: 1.8; -webkit-font-smoothing: antialiased; }
+    h1, h2, h3, .logo { font-family: var(--font-serif); font-weight: 600; color: var(--text-main); }
+    a { text-decoration: none; color: inherit; transition: opacity 0.2s ease; }
+    a:hover { opacity: 0.7; }
+    .container { max-width: var(--max-width); margin: 0 auto; padding: 0 2rem; }
+
+    /* --- Header & Nav --- */
+    #header { padding: 2rem 0; border-bottom: 1px solid #EAEAEA; background: #fff; }
+    .header-inner { max-width: 1000px; margin: 0 auto; padding: 0 2rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-size: 1.5rem; letter-spacing: -0.02em; }
+    .nav-links { display: flex; gap: 2rem; }
+    .nav-links a { font-size: 0.95rem; font-weight: 500; color: var(--text-muted); }
+    .nav-links a:hover, .nav-links a.active { color: var(--text-main); }
+
+    /* --- Bio Section --- */
+    .bio-header { padding: 4rem 0 2rem; text-align: center; }
+    .bio-header h1 { font-size: 3rem; margin-bottom: 1rem; }
+    
+    .bio-content {
+      font-size: 1.1rem;
+      color: #444;
+      margin-bottom: 4rem;
+    }
+    .bio-content p { margin-bottom: 1.5rem; }
+    .bio-content strong { color: var(--text-main); font-weight: 600; }
+    
+    .early-life-btn {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.8rem 1.8rem;
+      background: none;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+      font-weight: 500;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .early-life-btn:hover { background: var(--accent); color: #fff; }
+
+    /* --- Stats Grid --- */
+    .stats-section { padding: 4rem 0; border-top: 1px solid #EAEAEA; border-bottom: 1px solid #EAEAEA; background: #fff; margin-bottom: 4rem; }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      text-align: center;
+    }
+    .stat-item { padding: 1.5rem; }
+    .stat-number { font-size: 3rem; font-family: var(--font-serif); font-weight: 600; color: var(--accent); margin-bottom: 0.5rem; line-height: 1; }
+    .stat-label { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); font-weight: 600; }
+
+    /* --- Modal Styles --- */
+    .modal-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.6);
+      display: none; align-items: center; justify-content: center; z-index: 2000;
+      padding: 2rem;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal-content {
+      background: #fff; width: 100%; max-width: 800px;
+      max-height: 85vh; border-radius: 8px; position: relative;
+      display: flex; flex-direction: column;
+    }
+    .modal-header { padding: 2rem 2rem 1rem; border-bottom: 1px solid #EAEAEA; display: flex; justify-content: space-between; align-items: center; }
+    .modal-header h2 { font-size: 1.5rem; margin: 0; }
+    .modal-close { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #999; }
+    .modal-close:hover { color: #333; }
+    .modal-body { padding: 2rem; overflow-y: auto; font-size: 1.05rem; color: #444; }
+    .modal-body p { margin-bottom: 1.2rem; }
+
+    /* --- Footer --- */
+    #footer { text-align: center; padding: 4rem 0 2rem; color: var(--text-muted); font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+
+  <header id="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">Vivek H Sutar</a>
+      <nav class="nav-links">
+        <a href="about.html" class="active">About</a>
+        <a href="books.html">Books</a>
+        <a href="op-eds.html">Op-Eds</a>
+        <a href="media.html">Media</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <section class="bio-header">
+        <h1>About Me</h1>
+      </section>
+
+      <section class="bio-content">
+        <p>Vivek H. Sutar is an Indian writer, AI policy researcher, and social entrepreneur whose work explores the intersection of artificial intelligence, technological change, public policy, and society.</p>
+        
+        <p>He is the author of the Marathi book <em>Umbartha... Nava Yug Suru Hotay (Threshold... A New Era Begins)</em>, which examines artificial intelligence, Industry 5.0, and the governance of emerging technologies for a regional-language audience. By choosing to write in Marathi, Vivek seeks to broaden public engagement with technological change and make discussions on AI and the future of work accessible beyond English-speaking circles.</p>
+        
+        <p>In addition to his book, Vivek is a regular contributor of op-eds to leading Marathi newspapers, including <em>Sakaal</em>, <em>Lokmat</em>, and <em>Punyanagari</em>. His writing introduces regional audiences to global developments in artificial intelligence, technology policy, economic transformation, and governance.</p>
+        
+        <p>His research interests include AI governance, frontier AI, Industry 5.0, emerging technologies, digital public policy, and the social, cultural, and philosophical implications of intelligent systems. His work examines how technological progress intersects with democracy, economic development, ethics, and the future of human societies, with particular attention to perspectives from the Global South.</p>
+        
+        <p>Vivek's academic journey combines grassroots public engagement in India with international academic experience, including Harvard University. His academic engagements include the Center for AI and Digital Policy (CAIDP) and BlueDot Impact.</p>
+        
+        <p>Alongside his research, Vivek is the Founder and President of Vatsala Mahila Sanstha, a nonprofit organization focused on public health and community development. Through its flagship initiative, <strong>HealthForHer</strong>, he has led women's cancer awareness, education, and screening efforts across villages in Maharashtra while advocating for broader access to preventive healthcare, including HPV vaccination.</p>
+        
+        <p>His work has been recognized with several honors, including the inaugural Rajarshi Shahu Yuva Gaurav Award, presented in recognition of his contributions to technology, public discourse, and social impact. He also contributes to public policy initiatives in collaboration with Raje Shri Samarjeetsinh Ghatge, Chairman of the Shahu Group.</p>
+        
+        <p>Through his writing, research, and public initiatives, Vivek seeks to help shape a future in which advances in artificial intelligence are accompanied by democratic governance, cultural diversity, and broad public participation.</p>
+        
+        <div style="text-align: center; margin-top: 3rem;">
+          <button class="early-life-btn" id="open-early-life">Read Early Life & Leadership</button>
+        </div>
+      </section>
+    </div>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+      <div class="container">
+        <div class="stats-grid" id="stats-container">
+          <div class="stat-item">
+            <div class="stat-number" data-target="3000000" data-format="M">0</div>
+            <div class="stat-label">Women Impacted</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number" data-target="1227" data-format=",">0</div>
+            <div class="stat-label">Villages Reached</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number" data-target="3" data-format="">0</div>
+            <div class="stat-label">Published Works</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number" data-target="10" data-format="+">0</div>
+            <div class="stat-label">Awards</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="footer">
+    <div class="container">
+      <p>&copy; 2026 Vivek H Sutar. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Early Life Modal -->
+  <div class="modal-overlay" id="early-life-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Early Life & Leadership</h2>
+        <button class="modal-close" id="close-early-life"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+        <p>Vivek H Sutar is a litterateur, writer, and poet. He has published various literary and non-literary works, with <em>Healing Pages</em> and <em>Echoes of Emotions</em> marking his debut. He is the founder and president of Vatsala Mahila Sanstha, tirelessly working to bring significant positive outcomes to society. Born and raised in a small village in Kagal, he pursued his education at prestigious institutions such as Shantiniketan and Sanjay Ghodawat Cambridge International School, where he excelled as the topper in his 10th board exams. He continued his high school education with the International Baccalaureate Diploma Program.</p>
+        <p>Since childhood, Vivek has been extremely ambitious and highly decisive, with a competitive spirit. He has represented India in national and international karate championships organized by the Shotokan Karate-Do Association of India. During junior college, he served as Vice-President of the Student Council, organizing various events and initiatives, including bringing the AFS program to his school, organizing Model United Nations (MUN) conferences, and hosting university meets attended by prestigious international institutions. His excellence extended across academics, sports, leadership, and project management.</p>
+        <p>One of Vivek's remarkable achievements is founding <strong>HealthForHer</strong>, a project spanning <strong>1,227 villages</strong> in the Kolhapur district, potentially saving the lives of over <strong>three million women</strong>. The project focuses on eradicating women's cancer by raising awareness, educating rural women about the types of cancer, prevention strategies, and self-examination techniques. In collaboration with the district government, Raje Vikramsinh Ghatge Foundation and other NGOs, he organized Janjagruti events and provided free cancer screening tests. The program is ongoing and has gained traction. Currently, Vivek is working with Maharashtra's Cabinet Health Minister, Shri Prakash Abitkar, to expand this initiative statewide. He is also advocating for the vaccination of girls aged 9 to 14 with the HPV vaccine.</p>
+        <p>Vivek has undertaken various social initiatives, which allowed him the opportunity to work alongside and interact with IAS officers and prominent individuals such as Sharad Pawar, Nitin Gadkari, Dhairyasheel Mane, Sambhajiraje Chhatrapati, Sanjay Mandlik, Dhananjay Mahadik, Satej D. Patil, Hasan Mushrif, Prakash Abitkar, and Chetan Narke, among others.</p>
+        <p>Inspired by his desire to contribute more to society and influenced by his interactions with social leaders, Vivek founded Vatsala Mahila Sanstha to extend his efforts on a broader scale. Being born in the birthplace of Rajarshi Shahu Maharaj, Vivek grew up surrounded by the Maharaj's inspiring legacy. Immersed in stories of Rajarshi Shahu's contributions through books, theater programs, and conversations with elders, Vivek developed a deep curiosity and admiration for the Maharaj's life and vision. This inspired him to actively contribute to society's betterment.</p>
+        <p>Vivek is also active in the agricultural sector, organizing large-scale events in collaboration with ATMA Maharashtra and other organizations to introduce innovative technologies and advancements to farmers. He interned at Shri Dudhganga-Vedganga Sahakari Sakhar Karkhana, working on inventory management, data analysis, and other responsibilities.</p>
+        <p>Dedicated to public policy, Vivek works with Raje Shri Samarjeetsinh Ghatge, Chairman of the Shahu Group and Kolhapur DPC member, who is a direct descendant of Rajarshi Shahu Maharaj.</p>
+        <p>Vivek is a dynamic young leader, known for his exceptional oratory skills, visionary ideas, and impactful actions. He has received appreciation letters from social leaders and has been recognized with awards from local governments for his contributions.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // --- Modal Logic ---
+    const modal = document.getElementById('early-life-modal');
+    const openBtn = document.getElementById('open-early-life');
+    const closeBtn = document.getElementById('close-early-life');
+
+    openBtn.addEventListener('click', () => {
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    });
+
+    closeBtn.addEventListener('click', () => {
+      modal.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+
+    modal.addEventListener('click', (e) => {
+      if(e.target === modal) {
+        modal.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+    });
+
+    // --- Number Animation Logic (Triggered on scroll) ---
+    const statsContainer = document.getElementById('stats-container');
+    const statNumbers = document.querySelectorAll('.stat-number');
+    let hasAnimated = false;
+
+    function animateNumbers() {
+      statNumbers.forEach(stat => {
+        const target = parseInt(stat.getAttribute('data-target'));
+        const format = stat.getAttribute('data-format');
+        const duration = 2000; // 2 seconds
+        const stepTime = Math.abs(Math.floor(duration / 60)); // 60 frames
+        
+        let current = 0;
+        const increment = target / (duration / stepTime);
+
+        const timer = setInterval(() => {
+          current += increment;
+          if (current >= target) {
+            current = target;
+            clearInterval(timer);
+          }
+          
+          // Formatting the display
+          let displayValue = Math.floor(current);
+          if (format === 'M') {
+            displayValue = (displayValue / 1000000).toFixed(0) + 'M+';
+          } else if (format === ',') {
+            displayValue = displayValue.toLocaleString();
+          } else if (format === '+') {
+            displayValue = displayValue + '+';
+          }
+          
+          stat.textContent = displayValue;
+        }, stepTime);
+      });
+    }
+
+    // Intersection Observer to trigger animation when stats are visible
+    const observer = new IntersectionObserver((entries) => {
+      if(entries[0].isIntersecting && !hasAnimated) {
+        animateNumbers();
+        hasAnimated = true;
+      }
+    }, { threshold: 0.5 });
+
+    observer.observe(statsContainer);
+  </script>
+</body>
+</html>
