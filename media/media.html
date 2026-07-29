@@ -1,0 +1,299 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <title>Media Archive | Vivek H Sutar</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    /* --- Base Variables & Core Styles --- */
+    :root {
+      --bg-color: #FAFAFA;       
+      --text-main: #222222;      
+      --text-muted: #666666;     
+      --accent: #2C3E50;         
+      --font-serif: 'Lora', serif;
+      --font-sans: 'Inter', sans-serif;
+      --max-width: 1100px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: var(--font-sans); background-color: var(--bg-color); color: var(--text-main); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    h1, h2, h3, .logo { font-family: var(--font-serif); font-weight: 600; color: var(--text-main); }
+    a { text-decoration: none; color: inherit; transition: opacity 0.2s ease; }
+    a:hover { opacity: 0.7; }
+    .container { max-width: var(--max-width); margin: 0 auto; padding: 0 2rem; }
+
+    /* --- Header & Nav --- */
+    #header { padding: 2rem 0; border-bottom: 1px solid #EAEAEA; background: #fff; }
+    .header-inner { max-width: var(--max-width); margin: 0 auto; padding: 0 2rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-size: 1.5rem; letter-spacing: -0.02em; }
+    .nav-links { display: flex; gap: 2rem; }
+    .nav-links a { font-size: 0.95rem; font-weight: 500; color: var(--text-muted); }
+    .nav-links a:hover, .nav-links a.active { color: var(--text-main); }
+
+    /* --- Archive Header --- */
+    .archive-header { padding: 4rem 0 2rem; text-align: center; }
+    .archive-header h1 { font-size: 3rem; margin-bottom: 1rem; }
+    .archive-header p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* --- Filter System --- */
+    .filter-bar {
+      display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;
+      margin-bottom: 3rem; padding: 1rem 0; border-bottom: 1px solid #EAEAEA;
+    }
+    .filter-btn {
+      background: none; border: 1px solid #CCC; padding: 0.5rem 1.2rem;
+      border-radius: 50px; font-family: var(--font-sans); font-size: 0.9rem;
+      color: var(--text-muted); cursor: pointer; transition: all 0.2s ease;
+    }
+    .filter-btn:hover, .filter-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+    /* --- Masonry Grid --- */
+    .media-grid {
+      column-count: 3;
+      column-gap: 1.5rem;
+      margin-bottom: 6rem;
+    }
+    @media (max-width: 900px) { .media-grid { column-count: 2; } }
+    @media (max-width: 600px) { .media-grid { column-count: 1; } }
+
+    .media-item {
+      break-inside: avoid;
+      margin-bottom: 1.5rem;
+      background: #fff;
+      border: 1px solid #EAEAEA;
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .media-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    }
+    .media-item img {
+      width: 100%;
+      display: block;
+      border-bottom: 1px solid #EAEAEA;
+    }
+    .media-caption { padding: 1.5rem; }
+    .media-caption h3 { font-size: 1.1rem; margin-bottom: 0.5rem; line-height: 1.3; }
+    .media-meta { font-size: 0.85rem; color: var(--text-muted); }
+
+    /* --- Lightbox Modal --- */
+    .modal-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.85);
+      display: none; align-items: center; justify-content: center; z-index: 2000;
+      padding: 2rem;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal-content {
+      background: #fff; width: 100%; max-width: 1000px;
+      max-height: 90vh; border-radius: 8px; overflow: hidden;
+      display: flex; position: relative;
+    }
+    @media (max-width: 768px) { .modal-content { flex-direction: column; overflow-y: auto; } }
+    
+    .modal-image-col { flex: 2; background: #f5f5f5; display: flex; align-items: center; justify-content: center; padding: 2rem; }
+    .modal-image-col img { max-width: 100%; max-height: 80vh; object-fit: contain; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+    
+    .modal-text-col { flex: 1; padding: 3rem 2rem; display: flex; flex-direction: column; border-left: 1px solid #EAEAEA; }
+    .modal-close { position: absolute; top: 1rem; right: 1.5rem; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #999; }
+    .modal-close:hover { color: #333; }
+    
+    .modal-topic { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--accent); font-weight: 600; margin-bottom: 1rem; }
+    .modal-title-marathi { font-family: var(--font-serif); font-size: 1.5rem; margin-bottom: 0.5rem; }
+    .modal-title-english { font-size: 1.1rem; color: var(--text-muted); font-style: italic; margin-bottom: 2rem; }
+    .modal-details p { margin-bottom: 0.5rem; font-size: 0.95rem; }
+    .modal-details strong { color: var(--text-main); }
+
+    /* --- Footer --- */
+    #footer { text-align: center; padding: 4rem 0; border-top: 1px solid #EAEAEA; color: var(--text-muted); font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+
+  <header id="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">Vivek H Sutar</a>
+      <nav class="nav-links">
+        <a href="about.html">About</a>
+        <a href="books.html">Books</a>
+        <a href="op-eds.html">Op-Eds</a>
+        <a href="media.html" class="active">Media</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="archive-header">
+      <h1>Media Archive</h1>
+      <p>A digital press clipping book of news coverage, interviews, and public initiatives.</p>
+    </section>
+
+    <!-- Filter Buttons -->
+    <div class="filter-bar" id="filter-bar">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="healthforher">HealthForHer</button>
+      <button class="filter-btn" data-filter="awards">Awards</button>
+      <button class="filter-btn" data-filter="books">Book Launch</button>
+    </div>
+
+    <!-- Masonry Grid -->
+    <div class="media-grid" id="media-grid">
+      <!-- JavaScript will inject clippings here -->
+    </div>
+  </main>
+
+  <footer id="footer">
+    <div class="container">
+      <p>&copy; 2026 Vivek H Sutar. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- The Lightbox Modal -->
+  <div class="modal-overlay" id="media-modal">
+    <div class="modal-content">
+      <button class="modal-close" id="modal-close"><i class="fas fa-times"></i></button>
+      <div class="modal-image-col">
+        <img id="modal-img" src="" alt="Press Clipping">
+      </div>
+      <div class="modal-text-col">
+        <div class="modal-topic" id="modal-topic">Topic</div>
+        <h3 class="modal-title-marathi" id="modal-title-marathi">Original Headline</h3>
+        <p class="modal-title-english" id="modal-title-english">"English Translation"</p>
+        
+        <div class="modal-details">
+          <p><strong>Publication:</strong> <span id="modal-pub">Sakaal</span></p>
+          <p><strong>Date:</strong> <span id="modal-date">12 June 2026</span></p>
+          <p><strong>Language:</strong> <span id="modal-lang">Marathi</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 1. THE DATA: Add your clippings here over time
+    const mediaClippings = [
+      {
+        id: 1,
+        image: "https://via.placeholder.com/600x800.png?text=Newspaper+Scan+1",
+        titleMarathi: "आरोग्य उपक्रमाला उत्स्फूर्त प्रतिसाद",
+        titleEnglish: "Overwhelming response to rural health initiative",
+        publication: "Sakaal",
+        date: "14 June 2026",
+        language: "Marathi",
+        topic: "healthforher"
+      },
+      {
+        id: 2,
+        image: "https://via.placeholder.com/600x400.png?text=Newspaper+Scan+2",
+        titleMarathi: "विवेक सुतार यांना युवा गौरव पुरस्कार",
+        titleEnglish: "Vivek Sutar awarded Yuva Gaurav Puraskar",
+        publication: "Lokmat",
+        date: "20 May 2026",
+        language: "Marathi",
+        topic: "awards"
+      },
+      {
+        id: 3,
+        image: "https://via.placeholder.com/600x600.png?text=Newspaper+Scan+3",
+        titleMarathi: "उंबरठा: नव्या युगाची नांदी",
+        titleEnglish: "Umbartha: The dawn of a new era in tech literature",
+        publication: "Maharashtra Times",
+        date: "5 April 2026",
+        language: "Marathi",
+        topic: "books"
+      }
+    ];
+
+    const grid = document.getElementById('media-grid');
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    
+    // Modal Elements
+    const modal = document.getElementById('media-modal');
+    const modalClose = document.getElementById('modal-close');
+    const modalImg = document.getElementById('modal-img');
+    const modalTopic = document.getElementById('modal-topic');
+    const modalTitleMarathi = document.getElementById('modal-title-marathi');
+    const modalTitleEnglish = document.getElementById('modal-title-english');
+    const modalPub = document.getElementById('modal-pub');
+    const modalDate = document.getElementById('modal-date');
+    const modalLang = document.getElementById('modal-lang');
+
+    // 2. RENDER FUNCTION
+    function renderMedia(data) {
+      grid.innerHTML = '';
+      
+      data.forEach(item => {
+        const cardHTML = `
+          <div class="media-item" onclick="openModal(${item.id})">
+            <img src="${item.image}" alt="${item.titleEnglish}">
+            <div class="media-caption">
+              <h3>${item.titleMarathi}</h3>
+              <div class="media-meta">${item.publication} &bull; ${item.date}</div>
+            </div>
+          </div>
+        `;
+        grid.innerHTML += cardHTML;
+      });
+    }
+
+    // 3. MODAL LOGIC
+    window.openModal = function(id) {
+      const item = mediaClippings.find(c => c.id === id);
+      if(!item) return;
+
+      modalImg.src = item.image;
+      modalTopic.textContent = item.topic.replace('-', ' ');
+      modalTitleMarathi.textContent = item.titleMarathi;
+      modalTitleEnglish.textContent = `"${item.titleEnglish}"`;
+      modalPub.textContent = item.publication;
+      modalDate.textContent = item.date;
+      modalLang.textContent = item.language;
+
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden'; // Stop background scrolling
+    }
+
+    modalClose.addEventListener('click', () => {
+      modal.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+
+    // Close on clicking outside the content
+    modal.addEventListener('click', (e) => {
+      if(e.target === modal) {
+        modal.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+    });
+
+    // 4. FILTER LOGIC
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const filterValue = btn.getAttribute('data-filter');
+
+        if (filterValue === 'all') {
+          renderMedia(mediaClippings);
+        } else {
+          const filteredData = mediaClippings.filter(item => item.topic === filterValue);
+          renderMedia(filteredData);
+        }
+      });
+    });
+
+    // Initial Load
+    renderMedia(mediaClippings);
+  </script>
+</body>
+</html>
