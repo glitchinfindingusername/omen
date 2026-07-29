@@ -1,0 +1,298 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <title>Op-Eds Archive | Vivek H Sutar</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    /* --- Base Variables & Core Styles (Same as Index) --- */
+    :root {
+      --bg-color: #FAFAFA;       
+      --text-main: #222222;      
+      --text-muted: #666666;     
+      --accent: #2C3E50;         
+      --font-serif: 'Lora', serif;
+      --font-sans: 'Inter', sans-serif;
+      --max-width: 1000px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: var(--font-sans); background-color: var(--bg-color); color: var(--text-main); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    h1, h2, h3, .logo { font-family: var(--font-serif); font-weight: 600; color: var(--text-main); }
+    a { text-decoration: none; color: inherit; transition: opacity 0.2s ease; }
+    a:hover { opacity: 0.7; }
+    .container { max-width: var(--max-width); margin: 0 auto; padding: 0 2rem; }
+
+    /* --- Header & Nav --- */
+    #header { padding: 2rem 0; border-bottom: 1px solid #EAEAEA; background: #fff; }
+    .header-inner { max-width: var(--max-width); margin: 0 auto; padding: 0 2rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-size: 1.5rem; letter-spacing: -0.02em; }
+    .nav-links { display: flex; gap: 2rem; }
+    .nav-links a { font-size: 0.95rem; font-weight: 500; color: var(--text-muted); }
+    .nav-links a:hover, .nav-links a.active { color: var(--text-main); }
+
+    /* --- Archive Header --- */
+    .archive-header { padding: 4rem 0 2rem; text-align: center; }
+    .archive-header h1 { font-size: 3rem; margin-bottom: 1rem; }
+    .archive-header p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* --- Filter System --- */
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      margin-bottom: 3rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid #EAEAEA;
+    }
+    .filter-btn {
+      background: none;
+      border: 1px solid #CCC;
+      padding: 0.5rem 1.2rem;
+      border-radius: 50px;
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+
+    /* --- Op-Ed Grid --- */
+    .oped-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      margin-bottom: 6rem;
+    }
+    .oped-card {
+      background: #fff;
+      border: 1px solid #EAEAEA;
+      padding: 2rem;
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      transition: box-shadow 0.2s ease;
+    }
+    .oped-card:hover {
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    }
+    .oped-title { font-size: 1.5rem; margin-bottom: 0.2rem; }
+    .oped-meta { font-size: 0.9rem; color: var(--text-muted); display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
+    
+    /* Badges */
+    .badges { display: flex; gap: 0.5rem; margin-top: 0.5rem; }
+    .badge {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+    .badge-print { background: #f0f4f8; color: #2C3E50; }
+    .badge-online { background: #e6f7ff; color: #0050b3; }
+    .badge-lang { border: 1px solid #ddd; color: var(--text-muted); }
+
+    /* --- Footer --- */
+    #footer { text-align: center; padding: 4rem 0; border-top: 1px solid #EAEAEA; color: var(--text-muted); font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header id="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">Vivek H Sutar</a>
+      <nav class="nav-links">
+        <a href="about.html">About</a>
+        <a href="books.html">Books</a>
+        <a href="op-eds.html" class="active">Op-Eds</a>
+        <a href="media.html">Media</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container">
+    <section class="archive-header">
+      <h1>Op-Ed Archive</h1>
+      <p>A chronological collection of my articles, columns, and public commentary across regional and national publications.</p>
+    </section>
+
+    <!-- Filter Buttons -->
+    <div class="filter-bar" id="filter-bar">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="ai">AI & Tech</button>
+      <button class="filter-btn" data-filter="policy">Public Policy</button>
+      <button class="filter-btn" data-filter="society">Society</button>
+      <button class="filter-btn" data-filter="marathi">Marathi</button>
+      <button class="filter-btn" data-filter="english">English</button>
+    </div>
+
+    <!-- The Grid where JS will inject the cards -->
+    <div class="oped-grid" id="oped-grid">
+      <!-- Cards will be generated here -->
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer id="footer">
+    <div class="container">
+      <p>&copy; 2026 Vivek H Sutar. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- JavaScript for Data and Filtering -->
+  <script>
+    // 1. THE DATA: You just add items to this list later!
+    const opeds = [
+      {
+        title: "स्टारलिंक करार",
+        publication: "Punyanagari",
+        date: "30 Nov 2025",
+        language: "Marathi",
+        format: "Print",
+        topic: "ai",
+        link: "images/स्टारलिंक करार_1B3C70A.jpg" // Link to a PDF or online article
+      },
+      {
+        title: "डिजिटल सुरक्षेची झाकली मूठ",
+        publication: "Sakaal",
+        date: "18 Apr 2026",
+        language: "Marathi",
+        format: "Print",
+        topic: "ai",
+        link: "images/screencapture-epaper-esakal-smartepaper-UI-clipshare-share-aspx-2026-07-29-14_52_48.png"
+      },
+      {
+        title: "कृत्रिम प्रज्ञेचा 'पायाभूत' पैलू ",
+        publication: "Sakaal",
+        date: "13 Feb 2026",
+        language: "Marathi",
+        format: "Print",
+        topic: "policy",
+        link: "images/558_150_1906_1264.jpg"
+      },
+      {
+        title: "'एआय' युगात सत्याची नवी घडण ",
+        publication: "Sakaal",
+        date: "18 Oct 2025",
+        language: "Marathi",
+        format: "Print",
+        topic: "ai",
+        link: "images/screencapture-epaper-esakal-smartepaper-UI-clipshare-share-aspx-2026-07-29-14_56_24.png"
+      },
+      {
+  title: "नवतंत्रज्ञानाच्या क्षेत्रात सर्जनशीलतेची गरज",
+  publication: "Sakaal",
+  date: "10 Jan 2026",
+  language: "Marathi",
+  format: "Print", // or "Online"
+  topic: "policy", // e.g., ai, policy, society
+  link: "images/गरज बंडखोर सर्जनशीलतेची.png" // Or a URL if it's an online article
+},
+      {
+  title: "ज्ञानाचा नित्यानित्यविवेक",
+  publication: "Sakaal",
+  date: "29 Nov 2025",
+  language: "Marathi",
+  format: "Print", // or "Online"
+  topic: "policy", // e.g., ai, policy, society
+  link: "images/नित्यनित्य विवेक या नाव ज्ञान चोख_सकाळ_op-ed_29-11-2025.png" // Or a URL if it's an online article
+},
+      {
+  title: "'ए आय', मला पावसात जाऊ दे...!",
+  publication: "Sakaal",
+  date: "08 Nov 2025",
+  language: "Marathi",
+  format: "Print", // or "Online"
+  topic: "policy", // e.g., ai, policy, society
+  link: "images/screencapture-epaper-esakal-smartepaper-UI-clipshare-share-aspx-2026-07-29-14_58_00.png" // Or a URL if it's an online article
+},
+      {
+  title: "आपुलीच 'प्रतिमा' होते...",
+  publication: "Sakaal",
+  date: "24 Sep 2025",
+  language: "Marathi",
+  format: "Print", // or "Online"
+  topic: "ai", // e.g., ai, policy, society
+  link: "images/संमतीशिवाय सर्जनशिलता म्हणजे अतिक्रमणच_Sakal Op-ed.jpg" // Or a URL if it's an online article
+}
+    ];
+
+    const grid = document.getElementById('oped-grid');
+    const filterBtns = document.querySelectorAll('.filter-btn');
+
+    // 2. RENDER FUNCTION: Generates HTML for the cards
+    function renderOpEds(data) {
+      grid.innerHTML = ''; // Clear grid
+      
+      if(data.length === 0) {
+        grid.innerHTML = '<p style="color:#666;">No articles found for this filter.</p>';
+        return;
+      }
+
+      data.forEach(item => {
+        // Determine badge style based on print/online
+        const formatBadgeClass = item.format.toLowerCase() === 'print' ? 'badge-print' : 'badge-online';
+        const formatIcon = item.format.toLowerCase() === 'print' ? 'fa-newspaper' : 'fa-globe';
+
+        const cardHTML = `
+          <a href="${item.link}" target="_blank" rel="noopener noreferrer" class="oped-card">
+            <h3 class="oped-title">${item.title}</h3>
+            <div class="oped-meta">
+              <span><strong>${item.publication}</strong></span>
+              <span>&bull;</span>
+              <span>${item.date}</span>
+            </div>
+            <div class="badges">
+              <span class="badge ${formatBadgeClass}"><i class="fas ${formatIcon}"></i> ${item.format}</span>
+              <span class="badge badge-lang">${item.language}</span>
+            </div>
+          </a>
+        `;
+        grid.innerHTML += cardHTML;
+      });
+    }
+
+    // 3. FILTER LOGIC
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // Remove active class from all, add to clicked
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const filterValue = btn.getAttribute('data-filter');
+
+        if (filterValue === 'all') {
+          renderOpEds(opeds);
+        } else if (filterValue === 'marathi' || filterValue === 'english') {
+          // Filter by language
+          const filteredData = opeds.filter(item => item.language.toLowerCase() === filterValue);
+          renderOpEds(filteredData);
+        } else {
+          // Filter by topic
+          const filteredData = opeds.filter(item => item.topic === filterValue);
+          renderOpEds(filteredData);
+        }
+      });
+    });
+
+    // 4. INITIALLY LOAD ALL DATA
+    renderOpEds(opeds);
+  </script>
+</body>
+</html>
