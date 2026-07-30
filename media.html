@@ -114,6 +114,37 @@
 
     /* --- Footer --- */
     #footer { text-align: center; padding: 4rem 0; border-top: 1px solid #EAEAEA; color: var(--text-muted); font-size: 0.9rem; }
+
+    /* --- Search & Sort Controls --- */
+.controls-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #EAEAEA;
+}
+.search-box { flex: 1; min-width: 250px; position: relative; }
+.search-box i { position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: var(--text-muted); }
+.search-box input {
+  width: 100%; padding: 0.8rem 1rem 0.8rem 2.5rem; border: 1px solid #EAEAEA;
+  border-radius: 50px; font-family: var(--font-sans); font-size: 0.95rem;
+  color: var(--text-main); background: #fff; transition: all 0.2s ease;
+}
+.search-box input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(44, 62, 80, 0.05); }
+.sort-box { display: flex; align-items: center; gap: 0.5rem; }
+.sort-box label { font-size: 0.9rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+.sort-box select {
+  padding: 0.6rem 2rem 0.6rem 1rem; border: 1px solid #EAEAEA; border-radius: 4px;
+  font-family: var(--font-sans); font-size: 0.95rem; color: var(--text-main);
+  background-color: #fff; cursor: pointer; appearance: none;
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23666%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+  background-repeat: no-repeat; background-position: right 0.7rem top 50%; background-size: 0.65rem auto;
+}
+.sort-box select:focus { outline: none; border-color: var(--accent); }
+@media (max-width: 768px) { .controls-bar { flex-direction: column; align-items: stretch; } .sort-box { justify-content: space-between; } }
   </style>
 </head>
 <body>
@@ -146,6 +177,22 @@
     </div>
 
     <!-- Masonry Grid -->
+    <!-- Search and Sort Controls -->
+    <div class="controls-bar">
+      <div class="search-box">
+        <i class="fas fa-search"></i>
+        <input type="text" id="search-input" placeholder="Search by title, publication, or keyword...">
+      </div>
+      <div class="sort-box">
+        <label for="sort-select">Sort</label>
+        <select id="sort-select">
+          <option value="newest">Newest First</option>
+          <option value="oldest">Oldest First</option>
+          <option value="az">A-Z (Title)</option>
+          <option value="publication">Publication</option>
+        </select>
+      </div>
+    </div>
     <div class="media-grid" id="media-grid">
       <!-- JavaScript will inject clippings here -->
     </div>
@@ -215,6 +262,8 @@
 
     const grid = document.getElementById('media-grid');
     const filterBtns = document.querySelectorAll('.filter-btn');
+    const searchInput = document.getElementById('search-input');
+    const sortSelect = document.getElementById('sort-select');
     
     // Modal Elements
     const modal = document.getElementById('media-modal');
@@ -227,10 +276,16 @@
     const modalDate = document.getElementById('modal-date');
     const modalLang = document.getElementById('modal-lang');
 
-    // 2. RENDER FUNCTION
+    let currentFilter = 'all';
+    let searchQuery = '';
+    let currentSort = 'newest';
+
     function renderMedia(data) {
       grid.innerHTML = '';
-      
+      if(data.length === 0) {
+        grid.innerHTML = '<p style="color:#666; padding: 2rem 0;">No results found.</p>';
+        return;
+      }
       data.forEach(item => {
         const cardHTML = `
           <div class="media-item" onclick="openModal(${item.id})">
@@ -245,11 +300,9 @@
       });
     }
 
-    // 3. MODAL LOGIC
     window.openModal = function(id) {
       const item = mediaClippings.find(c => c.id === id);
       if(!item) return;
-
       modalImg.src = item.image;
       modalTopic.textContent = item.topic.replace('-', ' ');
       modalTitleMarathi.textContent = item.titleMarathi;
@@ -257,43 +310,57 @@
       modalPub.textContent = item.publication;
       modalDate.textContent = item.date;
       modalLang.textContent = item.language;
-
       modal.classList.add('open');
-      document.body.style.overflow = 'hidden'; // Stop background scrolling
+      document.body.style.overflow = 'hidden'; 
     }
 
-    modalClose.addEventListener('click', () => {
-      modal.classList.remove('open');
-      document.body.style.overflow = '';
-    });
+    modalClose.addEventListener('click', () => { modal.classList.remove('open'); document.body.style.overflow = ''; });
+    modal.addEventListener('click', (e) => { if(e.target === modal) { modal.classList.remove('open'); document.body.style.overflow = ''; } });
 
-    // Close on clicking outside the content
-    modal.addEventListener('click', (e) => {
-      if(e.target === modal) {
-        modal.classList.remove('open');
-        document.body.style.overflow = '';
+    function processAndRenderData() {
+      let processedData = [...mediaClippings];
+
+      if (currentFilter !== 'all') {
+        processedData = processedData.filter(item => item.topic === currentFilter);
       }
-    });
 
-    // 4. FILTER LOGIC
+      if (searchQuery.trim() !== '') {
+        const query = searchQuery.toLowerCase();
+        processedData = processedData.filter(item => {
+          return item.titleMarathi.toLowerCase().includes(query) ||
+                 item.titleEnglish.toLowerCase().includes(query) ||
+                 item.publication.toLowerCase().includes(query);
+        });
+      }
+
+      processedData.sort((a, b) => {
+        const dateA = new Date(a.date);
+        const dateB = new Date(b.date);
+        switch (currentSort) {
+          case 'newest': return dateB - dateA;
+          case 'oldest': return dateA - dateB;
+          case 'az': return a.titleEnglish.localeCompare(b.titleEnglish);
+          case 'publication': return a.publication.localeCompare(b.publication);
+          default: return 0;
+        }
+      });
+
+      renderMedia(processedData);
+    }
+
     filterBtns.forEach(btn => {
       btn.addEventListener('click', () => {
         filterBtns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-
-        const filterValue = btn.getAttribute('data-filter');
-
-        if (filterValue === 'all') {
-          renderMedia(mediaClippings);
-        } else {
-          const filteredData = mediaClippings.filter(item => item.topic === filterValue);
-          renderMedia(filteredData);
-        }
+        currentFilter = btn.getAttribute('data-filter');
+        processAndRenderData();
       });
     });
 
-    // Initial Load
-    renderMedia(mediaClippings);
+    searchInput.addEventListener('input', (e) => { searchQuery = e.target.value; processAndRenderData(); });
+    sortSelect.addEventListener('change', (e) => { currentSort = e.target.value; processAndRenderData(); });
+
+    processAndRenderData();
   </script>
 </body>
 </html>
