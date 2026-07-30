@@ -53,15 +53,17 @@
     }
     .filter-btn:hover, .filter-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
 
-    /* --- Masonry Grid --- */
+   /* --- Horizontal Grid --- */
     .media-grid {
-      column-count: 3;
-      column-gap: 1.5rem;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
       margin-bottom: 6rem;
+      align-items: start; /* Prevents short cards from stretching awkwardly */
     }
-    @media (max-width: 900px) { .media-grid { column-count: 2; } }
-    @media (max-width: 600px) { .media-grid { column-count: 1; } }
-
+    @media (max-width: 900px) { .media-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 600px) { .media-grid { grid-template-columns: 1fr; } }
+    
     .media-item {
       break-inside: avoid;
       margin-bottom: 1.5rem;
