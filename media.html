@@ -65,8 +65,9 @@
     @media (max-width: 600px) { .media-grid { grid-template-columns: 1fr; } }
     
     .media-item {
-      break-inside: avoid;
-      margin-bottom: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      height: 100%; /* Makes all cards in a row equal height */
       background: #fff;
       border: 1px solid #EAEAEA;
       border-radius: 8px;
@@ -80,13 +81,20 @@
     }
     .media-item img {
       width: 100%;
-      display: block;
+      height: 250px; /* Forces all thumbnail images to be the exact same height */
+      object-fit: cover; /* Crops the image elegantly without squishing it */
+      object-position: top; /* Ensures the newspaper headline stays visible at the top */
       border-bottom: 1px solid #EAEAEA;
     }
-    .media-caption { padding: 1.5rem; }
+    .media-caption { 
+      padding: 1.5rem; 
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1; /* Pushes the content to fill the remaining card space */
+    }
     .media-caption h3 { font-size: 1.1rem; margin-bottom: 0.5rem; line-height: 1.3; }
-    .media-meta { font-size: 0.85rem; color: var(--text-muted); }
-
+    .media-meta { font-size: 0.85rem; color: var(--text-muted); margin-top: auto; /* Pushes the date to the very bottom alignment */ }
+    
     /* --- Load More Button --- */
     .load-more-container {
       text-align: center;
