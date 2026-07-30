@@ -499,8 +499,11 @@
         return;
       }
       data.forEach(item => {
+        // Smart Click Logic: If there is a link, open it in a new tab. Otherwise, open the image pop-up.
+        const clickAction = item.link ? `window.open('${item.link}', '_blank')` : `openModal(${item.id})`;
+
         const cardHTML = `
-          <div class="media-item" onclick="openModal(${item.id})">
+          <div class="media-item" onclick="${clickAction}">
             <img src="${item.image}" alt="${item.titleEnglish}">
             <div class="media-caption">
               <h3>${item.titleMarathi}</h3>
